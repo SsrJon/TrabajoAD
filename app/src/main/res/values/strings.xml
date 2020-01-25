@@ -5,4 +5,11 @@
     <string name="apellido2">Apellido2</string>
     <string name="dni">DNI</string>
     <string name="curso">Curso</string>
+    <string name="inicio">Selecciona una opción</string>
+    <string name="alumnos">Mostrar alumnos</string>
+    <string name="añadir">Añadir alumno</string>
+    <string name="carga_local">Cargar BD local</string>
+    <string name="carga_online">Cargar BD online</string>
+    <string name="combinar">Combinar</string>
+
 </resources>
