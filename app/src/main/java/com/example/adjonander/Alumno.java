@@ -35,6 +35,7 @@ public class Alumno {
     private static FirebaseFirestore db;
 
 
+
     public static void leerAlumnos(){
 
         db = FirebaseFirestore.getInstance();
@@ -68,15 +69,7 @@ public class Alumno {
                     }
                 });
 
-
-
-
     }
-
-
-
-
-
 
 
 

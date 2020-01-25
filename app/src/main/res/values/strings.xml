@@ -11,5 +11,9 @@
     <string name="carga_local">Cargar BD local</string>
     <string name="carga_online">Cargar BD online</string>
     <string name="combinar">Combinar</string>
+    <string name="info">Información sobre el alumno</string>
+    <string name="ape1">Primer apellido</string>
+    <string name="ape2">Segundo apellido</string>
+
 
 </resources>

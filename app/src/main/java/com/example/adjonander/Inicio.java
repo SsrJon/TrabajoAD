@@ -15,32 +15,40 @@ import static com.example.adjonander.Alumno.alumnos;
 
 public class Inicio extends AppCompatActivity {
 
-    private Button btn;
+    private Button btnMostrar, btnAñadir;
 
-    DBHelper dbHelper;
-    SQLiteDatabase dbsqlite;
-    //public ArrayList<Alumno> AlumnoLocal = new ArrayList<>();
+    //DBHelper dbHelper;
+    //SQLiteDatabase dbsqlite;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicio);
 
-        Alumno.leerAlumnos();
-        cargarAlumnosLocal();
+        //Alumno.leerAlumnos();
+        //cargarAlumnosLocal();
 
 
 
-        btn=findViewById(R.id.buttonMostrar);
+        btnMostrar=findViewById(R.id.buttonMostrar);
+        btnAñadir=findViewById(R.id.buttonAñadir);
 
 
-        btn.setOnClickListener(new View.OnClickListener() {
+        btnMostrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(Inicio.this, AlumnosRecycler.class);
-                //myIntent.putExtra("dni", dni);
                 startActivity(myIntent);
 
+            }
+        });
+
+        btnAñadir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(Inicio.this, CrearAlumno.class);
+                startActivity(myIntent);
             }
         });
 
@@ -52,8 +60,10 @@ public class Inicio extends AppCompatActivity {
 
 
 
+    /*
     public void cargarAlumnosLocal(){
-        System.out.println("hola local");
+
+        Alumno.AlumnoLocal.clear();
         dbHelper = new DBHelper(getApplicationContext());
         dbsqlite = dbHelper.getWritableDatabase();
         Cursor cursorcantidad = dbsqlite.query(DBHelper.entidadAlumnos.TABLE_NAME,null,null,null,null,null,null);
@@ -71,4 +81,8 @@ public class Inicio extends AppCompatActivity {
 
         }
     }
+
+     */
+
+
 }

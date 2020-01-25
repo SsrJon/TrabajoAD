@@ -5,9 +5,10 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -23,9 +24,14 @@ public class AlumnosRecycler extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutmanager;
     private adaptador_recycler_alumno adaptador;
 
-    private Button btnOnline, btnLocal, btnCombinar;
-    ArrayList<Alumno> tipoBD=Alumno.getAlumnos();
+    private TextView tvNombre, tvApellido1, tvApellido2, tvDni, tvCurso;
+    private String nombre,apellido1, apellido2, dni, curso;
 
+    private Button btnOnline, btnLocal, btnCombinar;
+
+    DBHelper dbHelper;
+    SQLiteDatabase dbsqlite;
+    ArrayList<Alumno> tipoBD=Alumno.getAlumnos();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +57,6 @@ public class AlumnosRecycler extends AppCompatActivity {
                     }
                 }, 1000);
 
-
-
             }
         });
 
@@ -61,6 +65,7 @@ public class AlumnosRecycler extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 tipoBD=Alumno.getAlumnoLocal();
+                cargarAlumnosLocal();
 
 
                 Handler handler = new Handler();
@@ -98,21 +103,56 @@ public class AlumnosRecycler extends AppCompatActivity {
         adaptador.setOnItemClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View x) {
-                TextView tv = x.findViewById(R.id.textViewNombreR);
-                String piso = tv.getText().toString();
-                //Intent myIntent = new Intent(AlumnosRecycler.this, AlumnosRecycler.class);
-                //myIntent.putExtra("dni", dni);
-                //startActivity(myIntent);
+
+                tvNombre = x.findViewById(R.id.textViewNombreR);
+                tvApellido1 = x.findViewById(R.id.textViewApellido1R);
+                tvApellido2 = x.findViewById(R.id.textViewApellido2R);
+                tvDni = x.findViewById(R.id.textViewDniR);
+                tvCurso = x.findViewById(R.id.textViewCursoR);
+
+                nombre = tvNombre.getText().toString();
+                apellido1 = tvApellido1.getText().toString();
+                apellido2 = tvApellido2.getText().toString();
+                dni = tvDni.getText().toString();
+                curso = tvCurso.getText().toString();
+
+                Intent intent = new Intent(AlumnosRecycler.this, AlumnoClick.class);
+                intent.putExtra("nombre", nombre);
+                intent.putExtra("apellido1", apellido1);
+                intent.putExtra("apellido2", apellido2);
+                intent.putExtra("dni", dni);
+                intent.putExtra("curso", curso);
+                startActivity(intent);
             }
         });
 
         recyclerView.setAdapter(adaptador);
-
         layoutmanager = new GridLayoutManager(getApplicationContext(), 4);
         recyclerView.setLayoutManager(layoutmanager);
 
     }
 
+
+    public void cargarAlumnosLocal(){
+
+        Alumno.AlumnoLocal.clear();
+        dbHelper = new DBHelper(getApplicationContext());
+        dbsqlite = dbHelper.getWritableDatabase();
+        Cursor cursorcantidad = dbsqlite.query(DBHelper.entidadAlumnos.TABLE_NAME,null,null,null,null,null,null);
+        while (cursorcantidad.moveToNext()){
+            String nombreL = cursorcantidad.getString(cursorcantidad.getColumnIndexOrThrow(DBHelper.entidadAlumnos.COLUMN_NAME_NOMBRE));
+            String apellido1L = cursorcantidad.getString(cursorcantidad.getColumnIndexOrThrow(DBHelper.entidadAlumnos.COLUMN_NAME_APELLIDO1));
+            String apellido2L = cursorcantidad.getString(cursorcantidad.getColumnIndexOrThrow(DBHelper.entidadAlumnos.COLUMN_NAME_APELLIDO2));
+            String dniL = cursorcantidad.getString(cursorcantidad.getColumnIndexOrThrow(DBHelper.entidadAlumnos.COLUMN_NAME_DNI));
+            String cursoL = cursorcantidad.getString(cursorcantidad.getColumnIndexOrThrow(DBHelper.entidadAlumnos.COLUMN_NAME_CURSO));
+            Alumno AL = new Alumno(nombreL,apellido1L,apellido2L,dniL,cursoL);
+            Alumno.AlumnoLocal.add(AL);
+
+            System.out.println("Datos locales "+nombreL+" "+apellido1L+" "+apellido2L+" "+dniL+" "+cursoL);
+
+
+        }
+    }
 
 
 }
