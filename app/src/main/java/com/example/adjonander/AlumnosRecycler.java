@@ -29,8 +29,13 @@ public class AlumnosRecycler extends AppCompatActivity {
 
 
 
+
         recyclerView = findViewById(R.id.recyclerAlumnos);
-        ArrayList<Alumno> alumnoss = Alumno.getAlumnos();
+        //ArrayList<Alumno> alumnoss = Alumno.getAlumnos();
+
+        // Carga el arraylist seleccionado
+        ArrayList<Alumno> alumnoss = Alumno.getAlumnoLocal();
+
         Log.d("tag", "alumnos? " + alumnoss.size());
         System.out.println("hola "+alumnoss.size());
 

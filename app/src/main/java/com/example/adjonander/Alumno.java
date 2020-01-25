@@ -1,5 +1,8 @@
 package com.example.adjonander;
 
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -18,12 +21,16 @@ public class Alumno {
 
     /* RecyclerView PASO 3*/
 
-    private String Nombre;
-    private String Apellido1;
-    private String Apellido2;
-    private String DNI;
-    private String Curso;
-    private static ArrayList<Alumno> alumnos=new ArrayList();
+
+
+    public String Nombre;
+    public String Apellido1;
+    public String Apellido2;
+    public String DNI;
+    public String Curso;
+    public static ArrayList<Alumno> alumnos=new ArrayList(); //Online
+    public static ArrayList<Alumno> AlumnoLocal = new ArrayList<>(); //Local
+
 
     private static FirebaseFirestore db;
 
@@ -68,12 +75,21 @@ public class Alumno {
 
 
 
+
+
+
+
+
     public Alumno (String Nombre, String Apellido1, String Apellido2, String DNI, String Curso){
         this.Nombre=Nombre;
         this.Apellido1=Apellido1;
         this.Apellido2=Apellido2;
         this.DNI=DNI;
         this.Curso=Curso;
+    }
+
+    public static ArrayList<Alumno> getAlumnoLocal() {
+        return AlumnoLocal;
     }
 
 

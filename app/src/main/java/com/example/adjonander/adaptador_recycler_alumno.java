@@ -53,7 +53,6 @@ public class adaptador_recycler_alumno extends RecyclerView.Adapter<adaptador_re
         }
 
 
-
     }
 
 
