@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1096641442372",
+    "firebase_url": "https://trabajoad-d6b77.firebaseio.com",
+    "project_id": "trabajoad-d6b77",
+    "storage_bucket": "trabajoad-d6b77.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1096641442372:android:c19d741ffda2155e0dc211",
+        "android_client_info": {
+          "package_name": "com.example.adjonander"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1096641442372-2ioel7mqp42pehu0qloj0nksrnc178vv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKQt-J0zJE7EnsWaCvvUqXAiI8-tUrr2Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1096641442372-2ioel7mqp42pehu0qloj0nksrnc178vv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

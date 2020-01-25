@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">ADJonAnder</string>
+    <string name="nombre">Nombre</string>
+    <string name="apellido1">Apellido1</string>
+    <string name="apellido2">Apellido2</string>
+    <string name="dni">DNI</string>
+    <string name="curso">Curso</string>
 </resources>
