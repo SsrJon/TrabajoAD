@@ -4,9 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -20,26 +23,78 @@ public class AlumnosRecycler extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutmanager;
     private adaptador_recycler_alumno adaptador;
 
+    private Button btnOnline, btnLocal, btnCombinar;
+    ArrayList<Alumno> tipoBD=Alumno.getAlumnos();
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alumnos_recycler);
 
-        Alumno.leerAlumnos();
-
-
-
+        btnOnline=findViewById(R.id.buttonOnline);
+        btnLocal=findViewById(R.id.buttonLocal);
+        btnCombinar=findViewById(R.id.buttonCombinar);
 
         recyclerView = findViewById(R.id.recyclerAlumnos);
-        //ArrayList<Alumno> alumnoss = Alumno.getAlumnos();
 
-        // Carga el arraylist seleccionado
-        ArrayList<Alumno> alumnoss = Alumno.getAlumnoLocal();
+        btnOnline.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tipoBD=Alumno.getAlumnos();
+                Alumno.leerAlumnos();
 
-        Log.d("tag", "alumnos? " + alumnoss.size());
-        System.out.println("hola "+alumnoss.size());
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+                        recycler();
+                    }
+                }, 1000);
 
-        adaptador = new adaptador_recycler_alumno(Objects.requireNonNull(this), alumnoss);
+
+
+            }
+        });
+
+
+        btnLocal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tipoBD=Alumno.getAlumnoLocal();
+
+
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+                        recycler();
+                    }
+                }, 1000);
+
+            }
+        });
+
+        btnCombinar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+                        recycler();
+                    }
+                }, 1000);
+
+            }
+        });
+
+    }
+
+
+    public void recycler(){
+        ArrayList<Alumno> alumnoss =tipoBD;
+        adaptador = new adaptador_recycler_alumno(Objects.requireNonNull(getApplicationContext()), alumnoss);
+
         adaptador.setOnItemClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View x) {
@@ -51,17 +106,12 @@ public class AlumnosRecycler extends AppCompatActivity {
             }
         });
 
-
-
         recyclerView.setAdapter(adaptador);
 
-        layoutmanager = new GridLayoutManager(this, 4);
+        layoutmanager = new GridLayoutManager(getApplicationContext(), 4);
         recyclerView.setLayoutManager(layoutmanager);
 
-
-
     }
-
 
 
 
