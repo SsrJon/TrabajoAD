@@ -16,6 +16,8 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "AlumnosLocal.db";
 
 
+    //Creacion de la tabla
+
     public static class entidadAlumnos implements BaseColumns {
         public static final String TABLE_NAME = "Alumnos";
         public static final String COLUMN_NAME_NOMBRE = "Nombre" ;
@@ -39,12 +41,12 @@ public class DBHelper extends SQLiteOpenHelper {
             "DROP TABLE IF EXISTS " + entidadAlumnos.TABLE_NAME;
 
 
+    //La primera vez que se inicia la app crea la BD con la tabla y los primeros datos
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(SQL_CREATE_TABLE_ALUMNOS);
         crearAlumnos();
         insertarAlumnos(db);
-        System.out.println("se inicia el oncreate");
     }
 
     @Override
@@ -62,7 +64,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
 
-
+    //Datos iniciales
     public void crearAlumnos(){
 
         Alumno AL1 = new Alumno("Paco","Garcia","Gonzalez","12345678C","DD");
@@ -74,7 +76,7 @@ public class DBHelper extends SQLiteOpenHelper {
         alumnosLocal.add(AL3);
 
     }
-
+    //Se insertan los datos iniciales
     public void insertarAlumnos(SQLiteDatabase db){
 
         for (int i = 0;alumnosLocal.size()>i;i++) {

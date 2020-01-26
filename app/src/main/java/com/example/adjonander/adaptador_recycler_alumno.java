@@ -13,14 +13,11 @@ import java.util.List;
 
 public class adaptador_recycler_alumno extends RecyclerView.Adapter<adaptador_recycler_alumno.ViewHolder>  {
 
-    /* RecyclerView PASO 4*/
-
 
     private LayoutInflater inflador;
     protected List<Alumno> alumnosList;
     private Context contexto;
     private View.OnClickListener onClickListener;
-
 
     public adaptador_recycler_alumno (Context contexto,  List<Alumno> alumnosList){
 
@@ -28,9 +25,6 @@ public class adaptador_recycler_alumno extends RecyclerView.Adapter<adaptador_re
         this.alumnosList=alumnosList;
         this.contexto=contexto;
     }
-
-
-
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView nombre;

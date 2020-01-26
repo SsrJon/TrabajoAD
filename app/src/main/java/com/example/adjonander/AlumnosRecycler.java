@@ -24,7 +24,7 @@ import java.util.stream.Stream;
 
 public class AlumnosRecycler extends AppCompatActivity {
 
-    /* RecyclerView PASO 5*/
+    //Pantalla que contiene el recyclerview y las funciones para cargar las bases de datos
 
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutmanager;
@@ -50,14 +50,19 @@ public class AlumnosRecycler extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerAlumnos);
 
+        //Carga los elementos de la BD online
         btnOnline.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+
                 Toast.makeText(getApplicationContext(), (R.string.cargando), Toast.LENGTH_SHORT).show();
+                //Se define el arraylist que carga el recycler
                 tipoBD=Alumno.getAlumnos();
+                //Carga los datos de firebase en el arraylist
                 Alumno.leerAlumnos();
 
+                //Un delay para que de tiempo a cargar los datos de la BD correctamente
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     public void run() {
@@ -74,6 +79,7 @@ public class AlumnosRecycler extends AppCompatActivity {
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), (R.string.cargando), Toast.LENGTH_SHORT).show();
                 tipoBD=Alumno.getAlumnoLocal();
+                //Carga los datos de sqlite
                 cargarAlumnosLocal();
 
                 Handler handler = new Handler();
@@ -81,7 +87,7 @@ public class AlumnosRecycler extends AppCompatActivity {
                     public void run() {
                         recycler();
                     }
-                }, 500);
+                }, 1000);
 
             }
         });
@@ -93,6 +99,7 @@ public class AlumnosRecycler extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), (R.string.cargando), Toast.LENGTH_SHORT).show();
                 Alumno.AlumnoCombinada.clear();
                 tipoBD=Alumno.getAlumnoCombinada();
+                //Carga las dos bases de datos
                 Alumno.leerAlumnos();
                 cargarAlumnosLocal();
 
@@ -100,8 +107,10 @@ public class AlumnosRecycler extends AppCompatActivity {
                 handler.postDelayed(new Runnable() {
                     public void run() {
 
+                        //Añade los datos de firebase al arraylist
                         Alumno.AlumnoCombinada.addAll(Alumno.alumnos);
 
+                        //Compara los arraylist local y online y borra los DNIs repetidos en la local
                         for(int i = 0; i < Alumno.AlumnoCombinada.size(); i++){
 
                             for(int j = 0; j < Alumno.AlumnoLocal.size(); j++){
@@ -111,14 +120,13 @@ public class AlumnosRecycler extends AppCompatActivity {
                             }
                         }
 
+                        //Se agregan los elementos restantes al arraylist combinado
                         Alumno.AlumnoCombinada.addAll(Alumno.AlumnoLocal);
                         /*
                         for(int i = 0; i < Alumno.AlumnoCombinada.size(); i++){
                             System.out.println("Combinada "+Alumno.AlumnoCombinada.get(i).getDNI());
 
-                        }
-
-                         */
+                        }*/
 
                         recycler();
 
@@ -132,6 +140,8 @@ public class AlumnosRecycler extends AppCompatActivity {
 
 
     public void recycler(){
+
+        //El recyclerview
         ArrayList<Alumno> alumnoss =tipoBD;
         adaptador = new adaptador_recycler_alumno(Objects.requireNonNull(getApplicationContext()), alumnoss);
 
@@ -167,7 +177,7 @@ public class AlumnosRecycler extends AppCompatActivity {
 
     }
 
-
+    //Carga los datos de sqlite
     public void cargarAlumnosLocal(){
 
         Alumno.AlumnoLocal.clear();
@@ -183,9 +193,7 @@ public class AlumnosRecycler extends AppCompatActivity {
             Alumno AL = new Alumno(nombreL,apellido1L,apellido2L,dniL,cursoL);
             Alumno.AlumnoLocal.add(AL);
 
-            System.out.println("Datos locales "+nombreL+" "+apellido1L+" "+apellido2L+" "+dniL+" "+cursoL);
-
-
+            //System.out.println("Datos locales "+nombreL+" "+apellido1L+" "+apellido2L+" "+dniL+" "+cursoL);
         }
     }
 

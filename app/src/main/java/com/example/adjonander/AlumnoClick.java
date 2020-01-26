@@ -7,6 +7,8 @@ import android.widget.TextView;
 
 public class AlumnoClick extends AppCompatActivity {
 
+    //Pantalla que se muestra al hacer click en un elemento del recycler
+
     private TextView tvNombre, tvApellido1, tvApellido2, tvDni, tvCurso;
 
     @Override

@@ -8,17 +8,23 @@
 
 
     <!--Recycler View PASO 1-->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guiahorizonta9"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.68" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerAlumnos"
-        android:layout_width="417dp"
-        android:layout_height="558dp"
+        android:layout_width="402dp"
+        android:layout_height="0dp"
         android:foregroundGravity="center"
         android:scrollbars="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/guiahorizonta9"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/buttonLocal"
@@ -27,10 +33,10 @@
         android:text="@string/carga_local"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.148"
+        app:layout_constraintHorizontal_bias="0.147"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.869" />
+        app:layout_constraintVertical_bias="0.767" />
 
     <Button
         android:id="@+id/buttonOnline"
@@ -39,10 +45,10 @@
         android:text="@string/carga_online"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.826"
+        app:layout_constraintHorizontal_bias="0.859"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.869" />
+        app:layout_constraintVertical_bias="0.767" />
 
     <Button
         android:id="@+id/buttonCombinar"
@@ -51,10 +57,9 @@
         android:text="@string/combinar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.96" />
+        app:layout_constraintVertical_bias="0.855" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

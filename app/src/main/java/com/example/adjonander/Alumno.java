@@ -16,9 +16,6 @@ import static android.content.ContentValues.TAG;
 
 public class Alumno {
 
-    /* RecyclerView PASO 3*/
-
-
 
     public String Nombre;
     public String Apellido1;

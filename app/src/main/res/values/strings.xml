@@ -23,6 +23,8 @@
     <string name="alumno_añadido">Alumno añadido </string>
     <string name="insertado">Alumno BD online insertado en BD local </string>
     <string name="cargando">Cargando...</string>
+    <string name="vacio">Hay campos vacíos</string>
+
 
 
 
