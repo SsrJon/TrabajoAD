@@ -64,7 +64,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     public void crearAlumnos(){
-        System.out.println("helperhelperhelper");
+
         Alumno AL1 = new Alumno("Paco","Garcia","Gonzalez","12345678C","DD");
         Alumno AL2 = new Alumno("Maria","Martin","Hernandez","12345678D","DD");
         Alumno AL3 = new Alumno("Miren","Silva","Sanchez","12345678E","AA");
@@ -76,7 +76,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public void insertarAlumnos(SQLiteDatabase db){
-        System.out.println("helperhelperhelper");
+
         for (int i = 0;alumnosLocal.size()>i;i++) {
             ContentValues values = new ContentValues();
             values.put(DBHelper.entidadAlumnos.COLUMN_NAME_NOMBRE,alumnosLocal.get(i).Nombre);

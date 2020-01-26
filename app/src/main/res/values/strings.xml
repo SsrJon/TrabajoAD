@@ -8,12 +8,20 @@
     <string name="inicio">Selecciona una opción</string>
     <string name="alumnos">Mostrar alumnos</string>
     <string name="añadir">Añadir alumno</string>
+    <string name="añadir2">Añadir</string>
     <string name="carga_local">Cargar BD local</string>
     <string name="carga_online">Cargar BD online</string>
     <string name="combinar">Combinar</string>
     <string name="info">Información sobre el alumno</string>
     <string name="ape1">Primer apellido</string>
     <string name="ape2">Segundo apellido</string>
+    <string name="cargada_local">BD local cargada</string>
+    <string name="cargada_online">BD online cargada</string>
+    <string name="existe_local">El DNI existe en la BD local</string>
+    <string name="existe_online">El DNI existe en la BD online</string>
+    <string name="existe_ambas">El DNI existe en ambas BBDD</string>
+    <string name="alumno_añadido">Alumno añadido </string>
+    <string name="insertado">Alumno BD online insertado en BD local </string>
 
 
 </resources>
