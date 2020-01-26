@@ -12,9 +12,15 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedHashSet;
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class AlumnosRecycler extends AppCompatActivity {
 
@@ -47,6 +53,8 @@ public class AlumnosRecycler extends AppCompatActivity {
         btnOnline.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Toast.makeText(getApplicationContext(), (R.string.cargando), Toast.LENGTH_SHORT).show();
                 tipoBD=Alumno.getAlumnos();
                 Alumno.leerAlumnos();
 
@@ -64,16 +72,16 @@ public class AlumnosRecycler extends AppCompatActivity {
         btnLocal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), (R.string.cargando), Toast.LENGTH_SHORT).show();
                 tipoBD=Alumno.getAlumnoLocal();
                 cargarAlumnosLocal();
-
 
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     public void run() {
                         recycler();
                     }
-                }, 1000);
+                }, 500);
 
             }
         });
@@ -82,13 +90,40 @@ public class AlumnosRecycler extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                Toast.makeText(getApplicationContext(), (R.string.cargando), Toast.LENGTH_SHORT).show();
+                Alumno.AlumnoCombinada.clear();
+                tipoBD=Alumno.getAlumnoCombinada();
+                Alumno.leerAlumnos();
+                cargarAlumnosLocal();
 
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     public void run() {
+
+                        Alumno.AlumnoCombinada.addAll(Alumno.alumnos);
+
+                        for(int i = 0; i < Alumno.AlumnoCombinada.size(); i++){
+
+                            for(int j = 0; j < Alumno.AlumnoLocal.size(); j++){
+                                if (Alumno.AlumnoCombinada.get(i).getDNI().equals(Alumno.AlumnoLocal.get(j).getDNI())){
+                                    Alumno.AlumnoLocal.remove(j);
+                                }
+                            }
+                        }
+
+                        Alumno.AlumnoCombinada.addAll(Alumno.AlumnoLocal);
+                        /*
+                        for(int i = 0; i < Alumno.AlumnoCombinada.size(); i++){
+                            System.out.println("Combinada "+Alumno.AlumnoCombinada.get(i).getDNI());
+
+                        }
+
+                         */
+
                         recycler();
+
                     }
-                }, 1000);
+                }, 2000);
 
             }
         });

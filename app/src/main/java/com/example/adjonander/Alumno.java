@@ -1,8 +1,5 @@
 package com.example.adjonander;
 
-import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -30,6 +27,7 @@ public class Alumno {
     public String Curso;
     public static ArrayList<Alumno> alumnos=new ArrayList(); //Online
     public static ArrayList<Alumno> AlumnoLocal = new ArrayList<>(); //Local
+    public static ArrayList<Alumno> AlumnoCombinada = new ArrayList<>(); //Combinada
 
 
     private static FirebaseFirestore db;
@@ -64,7 +62,7 @@ public class Alumno {
                             System.out.println("fallo");
 
                         }
-                        Log.d("tag", "casas? " + alumnos.size());
+                        Log.d("tag", "alumnos? " + alumnos.size());
                         System.out.println("tamaño "+alumnos.size());
                     }
                 });
@@ -110,4 +108,12 @@ public class Alumno {
         Log.d("tag", "tamaño arraylist alumnos: " + alumnos.size());
         return alumnos;
     }
+
+
+    public static ArrayList<Alumno> getAlumnoCombinada() {
+        return AlumnoCombinada;
+    }
+
+
+
 }

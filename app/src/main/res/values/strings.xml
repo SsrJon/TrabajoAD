@@ -22,6 +22,8 @@
     <string name="existe_ambas">El DNI existe en ambas BBDD</string>
     <string name="alumno_añadido">Alumno añadido </string>
     <string name="insertado">Alumno BD online insertado en BD local </string>
+    <string name="cargando">Cargando...</string>
+
 
 
 </resources>
