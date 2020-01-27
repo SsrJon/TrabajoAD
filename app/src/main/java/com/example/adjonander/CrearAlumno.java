@@ -31,6 +31,8 @@ public class CrearAlumno extends AppCompatActivity  {
     SQLiteDatabase dbsqlite;
     private int existeEnLocal=0;
     private int existeEnOnline=0;
+    String DNIAVerificar;
+    String requisitos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,60 +50,74 @@ public class CrearAlumno extends AppCompatActivity  {
         etCurso=findViewById(R.id.editTextCurso);
 
 
+        //formato del DNI 8 numeros + 1 letra
+       requisitos = "(\\d{1,8})([TRWAGMYFPDXBNJZSQVHLCKE])";
+
+
         btnAñadir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                DNIAVerificar = etDni.getText().toString();
 
                 if (etNombre.getText().toString().equals("")||etApellido1.getText().toString().equals("")||etApellido2.getText().toString().equals("")||etDni.getText().toString().equals("")||
                         etCurso.getText().toString().equals("")){
                     Toast.makeText(getApplicationContext(), (R.string.vacio), Toast.LENGTH_SHORT).show();
                 } else{
 
-                    existeEnLocal=0;
-                    existeEnOnline=0;
+                    if (DNIAVerificar.matches(requisitos) && DNIAVerificar.length() > 0) {
 
-                    CompruebaOnline();
-                    CompruebaLocal();
+                        existeEnLocal=0;
+                        existeEnOnline=0;
 
+                        CompruebaOnline();
+                        CompruebaLocal();
 
-                    Handler handler = new Handler();
-                    handler.postDelayed(new Runnable() {
-                        public void run() {
+                        Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            public void run() {
 
-                            //Si no existe en la BD local se añade
-                            if (existeEnOnline==0){
+                                //Si no existe en la BD local se añade
+                                if (existeEnOnline==0){
 
-                                ContentValues values = new ContentValues();
-                                values.put(DBHelper.entidadAlumnos.COLUMN_NAME_NOMBRE,etNombre.getText().toString());
-                                values.put(DBHelper.entidadAlumnos.COLUMN_NAME_APELLIDO1,etApellido1.getText().toString());
-                                values.put(DBHelper.entidadAlumnos.COLUMN_NAME_APELLIDO2, etApellido2.getText().toString());
-                                values.put(DBHelper.entidadAlumnos.COLUMN_NAME_DNI, etDni.getText().toString());
-                                values.put(DBHelper.entidadAlumnos.COLUMN_NAME_CURSO, etCurso.getText().toString());
-                                dbsqlite.insert(DBHelper.entidadAlumnos.TABLE_NAME, null, values);
+                                    ContentValues values = new ContentValues();
+                                    values.put(DBHelper.entidadAlumnos.COLUMN_NAME_NOMBRE,etNombre.getText().toString());
+                                    values.put(DBHelper.entidadAlumnos.COLUMN_NAME_APELLIDO1,etApellido1.getText().toString());
+                                    values.put(DBHelper.entidadAlumnos.COLUMN_NAME_APELLIDO2, etApellido2.getText().toString());
+                                    values.put(DBHelper.entidadAlumnos.COLUMN_NAME_DNI, etDni.getText().toString());
+                                    values.put(DBHelper.entidadAlumnos.COLUMN_NAME_CURSO, etCurso.getText().toString());
+                                    dbsqlite.insert(DBHelper.entidadAlumnos.TABLE_NAME, null, values);
 
-                                Toast.makeText(getApplicationContext(), (R.string.alumno_añadido), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(), (R.string.alumno_añadido), Toast.LENGTH_SHORT).show();
 
-                                existeEnLocal=1;
+                                    existeEnLocal=1;
+                                }
+
+                                //Si existe en la online pero no en la local, se añade
+                                if (existeEnLocal==0){
+
+                                    ContentValues values = new ContentValues();
+                                    values.put(DBHelper.entidadAlumnos.COLUMN_NAME_NOMBRE,nombreOnline);
+                                    values.put(DBHelper.entidadAlumnos.COLUMN_NAME_APELLIDO1, apellido1Online);
+                                    values.put(DBHelper.entidadAlumnos.COLUMN_NAME_APELLIDO2, apellido2Online);
+                                    values.put(DBHelper.entidadAlumnos.COLUMN_NAME_DNI, dniOnline);
+                                    values.put(DBHelper.entidadAlumnos.COLUMN_NAME_CURSO, cursoOnline);
+                                    dbsqlite.insert(DBHelper.entidadAlumnos.TABLE_NAME, null, values);
+
+                                    Toast.makeText(getApplicationContext(), (R.string.insertado), Toast.LENGTH_SHORT).show();
+
+                                }
+
                             }
+                        }, 2000);
 
-                            //Si existe en la online pero no en la local, se añade
-                            if (existeEnLocal==0){
 
-                                ContentValues values = new ContentValues();
-                                values.put(DBHelper.entidadAlumnos.COLUMN_NAME_NOMBRE,nombreOnline);
-                                values.put(DBHelper.entidadAlumnos.COLUMN_NAME_APELLIDO1, apellido1Online);
-                                values.put(DBHelper.entidadAlumnos.COLUMN_NAME_APELLIDO2, apellido2Online);
-                                values.put(DBHelper.entidadAlumnos.COLUMN_NAME_DNI, dniOnline);
-                                values.put(DBHelper.entidadAlumnos.COLUMN_NAME_CURSO, cursoOnline);
-                                dbsqlite.insert(DBHelper.entidadAlumnos.TABLE_NAME, null, values);
+                    } else{
+                        Toast.makeText(getApplicationContext(), (R.string.invalido), Toast.LENGTH_SHORT).show();
 
-                                Toast.makeText(getApplicationContext(), (R.string.insertado), Toast.LENGTH_SHORT).show();
+                    }
 
-                            }
 
-                        }
-                    }, 2000);
                 }
 
 

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ADJonAnder</string>
+    <string name="app_name">Gestión Alumnos</string>
     <string name="nombre">Nombre</string>
     <string name="apellido1">Apellido1</string>
     <string name="apellido2">Apellido2</string>
@@ -24,6 +24,7 @@
     <string name="insertado">Alumno BD online insertado en BD local </string>
     <string name="cargando">Cargando...</string>
     <string name="vacio">Hay campos vacíos</string>
+    <string name="invalido">DNI  no válido</string>
 
 
 
