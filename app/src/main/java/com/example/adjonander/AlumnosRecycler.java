@@ -33,7 +33,7 @@ public class AlumnosRecycler extends AppCompatActivity {
     private TextView tvNombre, tvApellido1, tvApellido2, tvDni, tvCurso;
     private String nombre,apellido1, apellido2, dni, curso;
 
-    private Button btnOnline, btnLocal, btnCombinar;
+    private Button btnOnline, btnLocal, btnCombinar, btnAtras;
 
     DBHelper dbHelper;
     SQLiteDatabase dbsqlite;
@@ -47,6 +47,7 @@ public class AlumnosRecycler extends AppCompatActivity {
         btnOnline=findViewById(R.id.buttonOnline);
         btnLocal=findViewById(R.id.buttonLocal);
         btnCombinar=findViewById(R.id.buttonCombinar);
+        btnAtras=findViewById(R.id.buttonAtras);
 
         recyclerView = findViewById(R.id.recyclerAlumnos);
 
@@ -133,6 +134,16 @@ public class AlumnosRecycler extends AppCompatActivity {
                     }
                 }, 2000);
 
+            }
+        });
+
+
+
+        btnAtras.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(AlumnosRecycler.this, Inicio.class);
+                startActivity(myIntent);
             }
         });
 

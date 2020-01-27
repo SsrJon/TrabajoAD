@@ -3,6 +3,7 @@ package com.example.adjonander;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -23,7 +24,7 @@ import static android.content.ContentValues.TAG;
 
 public class CrearAlumno extends AppCompatActivity  {
 
-    private Button btnAñadir;
+    private Button btnAñadir, btnAtras;
     private EditText etNombre, etApellido1, etApellido2, etDni, etCurso;
     private static FirebaseFirestore dbOnline;
     private String nombreOnline, apellido1Online, apellido2Online, dniOnline, cursoOnline;
@@ -43,6 +44,7 @@ public class CrearAlumno extends AppCompatActivity  {
         dbsqlite = dbHelper.getWritableDatabase();
 
         btnAñadir=findViewById(R.id.buttonAñadirBD);
+        btnAtras=findViewById(R.id.buttonAtrasBD);
         etNombre=findViewById(R.id.editTextNombre);
         etApellido1=findViewById(R.id.editTextApellido1);
         etApellido2=findViewById(R.id.editTextApellido2);
@@ -122,6 +124,15 @@ public class CrearAlumno extends AppCompatActivity  {
 
 
 
+            }
+        });
+
+
+        btnAtras.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(CrearAlumno.this, Inicio.class);
+                startActivity(myIntent);
             }
         });
 

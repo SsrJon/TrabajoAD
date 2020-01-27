@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.adjonander">
 
     <application
@@ -8,17 +9,22 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/bd"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".CrearAlumno"></activity>
-        <activity android:name=".AlumnoClick" />
-        <activity android:name=".Inicio">
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".CrearAlumno"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".AlumnoClick"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Inicio"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AlumnosRecycler" />
+        <activity android:name=".AlumnosRecycler"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
